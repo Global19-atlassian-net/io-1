@@ -15,6 +15,8 @@ void main() {
   setUp(() async {
     fakeStdIn = StreamController<String>(sync: true);
     sharedStdIn = SharedStdIn(fakeStdIn.stream.map((s) => s.codeUnits));
+
+    addTearDown(sharedStdIn.terminate);
   });
 
   test('should allow a single subscriber', () async {
